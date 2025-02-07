@@ -10,13 +10,13 @@ function App() {
     return (
         <>
             <div>
-                <NavBar />
-                <div>
+                <NavBar/>
+                <div className='container'>
                     <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/create' element={<CreatePost />} />
-                        <Route path='/seminars/:id' element={<PostCard />} />
-                        <Route path='*' element={<NotFound />} />
+                        <Route path='/' element={<Home/>}/>
+                        <Route path='/create' element={<CreatePost/>}/>
+                        <Route path='/seminars/:id' element={<PostCard/>}/>
+                        <Route path='*' element={<NotFound/>}/>
                     </Routes>
                 </div>
             </div>

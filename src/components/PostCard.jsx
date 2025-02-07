@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import useFetch from "../hooks/useFetch.jsx";
 import {useState} from "react";
-import EditSeminar from "./EditSeminar.jsx";
+import EditSeminar from "./PostEdit.jsx";
 
 const PostCard = () => {
     const {id} = useParams()

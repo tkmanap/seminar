@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import "assets/styles/reset.css";
+
+body {
+    font-family: "Quicksand", sans-serif;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: gray;
+    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}

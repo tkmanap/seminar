@@ -8,30 +8,30 @@ const useFetch = (url) => {
     useEffect(() => {
         const abortConst = new AbortController()
 
-        setTimeout(() => { // To simulate real server request
-            fetch(url, {signal: abortConst.signal})
-                .then(res => {
-                    if(!res.ok) throw Error('Failed to fetch the data')
-                    return res.json()
-                })
-                .then(data => {
-                    console.log(data);
-                    setData(data)
+        fetch(url, {signal: abortConst.signal})
+            .then(res => {
+                if (!res.ok) throw Error('Failed to fetch the data')
+                return res.json()
+            })
+            .then(data => {
+                console.log(data);
+                setData(data)
+                setIsPending(false)
+                setError(null)
+            })
+            .catch(err => {
+                //console.log(err.message);
+                if (err.name === 'AbortError') {
+                    console.log('fetch aborted')
+                } else {
                     setIsPending(false)
-                    setError(null)
-                })
-                .catch(err => {
-                    //console.log(err.message);
-                    if (err.name === 'AbortError') {
-                        console.log('fetch aborted')
-                    } else {
-                        setIsPending(false)
-                        setError(err.message)
-                    }
-                })
-        }, 1000)
+                    setError(err.message)
+                }
+            })
 
-        return () => { abortConst.abort() }
+        return () => {
+            abortConst.abort()
+        }
     }, [url])
 
     return {data, isPending, error}
