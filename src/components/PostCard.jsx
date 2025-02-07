@@ -1,5 +1,7 @@
 import {useNavigate, useParams} from "react-router";
 import useFetch from "../hooks/useFetch.jsx";
+import {useState} from "react";
+import EditSeminar from "./EditSeminar.jsx";
 
 const PostCard = () => {
     const {id} = useParams()
@@ -14,18 +16,41 @@ const PostCard = () => {
         });
     }
 
+
+    const [isModalOpen, setIsModalOpen] = useState(false);  // State to control modal visibility
+
+    const handleEditClick = () => {
+        setIsModalOpen(true);  // Open the modal
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false); // Close the modal
+    };
+
     return (
         <div>
             {isPending && <div>Loading...</div>}
             {error && <div>{error}</div>}
             {seminar && (
-                <article>
+                <div>
                     <h2>{seminar.title}</h2>
                     <div>{seminar.description}</div>
                     <p>{seminar.time}</p>
                     <p>{seminar.date}</p>
-                    <button onClick={handleDeleteClick}>delete</button>
-                </article>
+                    <img src={seminar.photo} alt="seminar photo"/>
+                    <button onClick={handleEditClick}>Edit</button>
+                    <button onClick={handleDeleteClick}>Delete</button>
+
+                    {isModalOpen && (
+                        <EditSeminar
+                            seminar={seminar}
+                            onClose={handleCloseModal}
+                            seminarId={id}
+                        />
+                    )
+
+                    }
+                </div>
             )}
         </div>
     );

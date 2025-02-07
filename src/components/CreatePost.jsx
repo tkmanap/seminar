@@ -4,12 +4,13 @@ import {useState} from "react";
 const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const [photo, setPhoto] = useState('')
     const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const blog = {title, body}
+        const blog = {title, body, photo}
 
         setIsPending(true)
 
@@ -41,6 +42,13 @@ const CreatePost = () => {
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                 ></textarea>
+                <label>Seminar image:</label>
+                <input
+                    type="text"
+                    required
+                    value={photo}
+                    onChange={(e) => setPhoto(e.target.value)}
+                />
                 {!isPending && <button>Add seminar</button>}
                 {isPending && <button disabled>Adding seminar...</button>}
                 <p>{ title }</p>
